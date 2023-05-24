@@ -4,7 +4,8 @@ let squares = document.querySelectorAll('.square');
 let isPawnSelected = false;
 let moves = [];
 let currentId;
-let turn = "White's Turn"
+let currentTurn = "white";
+
 squares.forEach((ele) => {
     ele.addEventListener('click', () => {
         // removing  hints for previosly clicked pawns
@@ -19,8 +20,8 @@ squares.forEach((ele) => {
                 isPawnSelected = true;
                 isWhite = ele.innerHTML.includes('White');
                 pawnName = findPawnName(ele.innerHTML);
-
-                if (isWhite) {
+                console.log("Turn: ", currentTurn)
+                if (isWhite && currentTurn === 'white') {
                     if (pawnName === 'WhitePawn') {
                         // console.log("white pawn !");
                         moves = getPawnMoves(true, currentId);
@@ -54,7 +55,7 @@ squares.forEach((ele) => {
                     }
                 }
                 // code for black pawns
-                if (!isWhite) {
+                if (!isWhite && currentTurn === 'black') {
                     if (pawnName === 'BlackPawn') {
                         // console.log("black pawn !");
                         moves = getPawnMoves(false, currentId);
@@ -639,14 +640,24 @@ function removeHint(clicked) {
 
 function movePawn(from, to) {
     moves.forEach((ii) => {
-
         // Moving pawn
-        if (to == ii) {
+        if (to == ii && from != to) {
             let temp = document.getElementById(from).innerHTML;
             document.getElementById(from).innerHTML = '';
             document.getElementById(to).innerHTML = temp;
+
+            if (currentTurn === 'white') {
+                currentTurn = 'black';
+            } else if (currentTurn === 'black') {
+                currentTurn = 'white';
+            }
+            changeTurn();
         }
     })
 
 }
-let currentTurn = "white";
+
+function changeTurn() {
+    const turn = document.querySelector('#turn');
+    turn.innerHTML = currentTurn;
+}
