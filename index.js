@@ -750,21 +750,126 @@ function getQueenMoves(isWhite, id) {
 function getKingMoves(isWhite, id) {
     let n = Number(id);
     let arr = [];
+    let isOppsitePawn = true;
+    let isNull = document.getElementById(n + 1) == null;
 
+    if ((!isNull && isOppsitePawn) || (!isNull && document.getElementById(n + 1) == '')) {
+        let temp = findPawnName(document.getElementById(n + 1).innerHTML) + ""
+        console.log("tejmp: ", temp);
+        if (isWhite && temp.includes('White')) {
 
+        } else if (!isWhite && temp.includes('Black')) {
 
-    if (document.getElementById(n + 1) != null) {
-        arr.push(n + 1);
+        } else {
+
+            arr.push(n + 1);
+        }
     }
-    if (document.getElementById(n - 1) != null) {
-        arr.push(n - 1);
+    isNull = document.getElementById(n - 1) == null;
+    if ((document.getElementById(n - 1) != null && isOppsitePawn) ||
+        (document.getElementById(n - 1) != null && document.getElementById(n - 1) == '')) {
+        // arr.push(n - 1);
+        let temp = findPawnName(document.getElementById(n - 1).innerHTML) + ""
+        console.log("tejmp: ", temp);
+        if (isWhite && temp.includes('White')) {
+
+        } else if (!isWhite && temp.includes('Black')) {
+
+        } else {
+
+            arr.push(n - 1);
+        }
     }
-    if (document.getElementById(n + 10) != null) {
-        arr.push(n + 10);
+    isNull = document.getElementById(n + 10) == null;
+    if ((document.getElementById(n + 10) != null && isOppsitePawn) ||
+        (document.getElementById(n + 10) != null && document.getElementById(n + 10) == '')) {
+        let temp = findPawnName(document.getElementById(n + 10).innerHTML) + ""
+        console.log("tejmp: ", temp);
+        if (isWhite && temp.includes('White')) {
+
+        } else if (!isWhite && temp.includes('Black')) {
+
+        } else {
+
+            arr.push(n + 10);
+        }
     }
-    if (document.getElementById(n - 10) != null) {
-        arr.push(n - 10);
+    isNull = document.getElementById(n - 10) == null;
+    if ((document.getElementById(n - 10) != null && isOppsitePawn) ||
+        (document.getElementById(n - 10) != null && document.getElementById(n - 10) == '')) {
+        // arr.push(n - 10);
+        let temp = findPawnName(document.getElementById(n - 10).innerHTML) + ""
+        console.log("tejmp: ", temp);
+        if (isWhite && temp.includes('White')) {
+
+        } else if (!isWhite && temp.includes('Black')) {
+
+        } else {
+
+            arr.push(n - 10);
+        }
     }
+    isNull = document.getElementById(n + 11) == null;
+    if ((document.getElementById(n + 11) != null && isOppsitePawn) ||
+        (document.getElementById(n + 11) != null && document.getElementById(n + 11) == '')) {
+        // arr.push(n + 11);
+        let temp = findPawnName(document.getElementById(n + 11).innerHTML) + ""
+        console.log("tejmp: ", temp);
+        if (isWhite && temp.includes('White')) {
+
+        } else if (!isWhite && temp.includes('Black')) {
+
+        } else {
+
+            arr.push(n + 11);
+        }
+    }
+    isNull = document.getElementById(n - 11) == null;
+    if ((document.getElementById(n - 11) != null && isOppsitePawn) ||
+        (document.getElementById(n - 11) != null && document.getElementById(n - 11) == '')) {
+        // arr.push(n - 11);
+        let temp = findPawnName(document.getElementById(n - 11).innerHTML) + ""
+        console.log("tejmp: ", temp);
+        if (isWhite && temp.includes('White')) {
+
+        } else if (!isWhite && temp.includes('Black')) {
+
+        } else {
+
+            arr.push(n - 11);
+        }
+    }
+    isNull = document.getElementById(n + 9) == null;
+    if ((document.getElementById(n + 9) != null && isOppsitePawn) ||
+        (document.getElementById(n + 9) != null && document.getElementById(n + 9) == '')) {
+        // arr.push(n + 9);
+        let temp = findPawnName(document.getElementById(n + 9).innerHTML) + ""
+        console.log("tejmp: ", temp);
+        if (isWhite && temp.includes('White')) {
+
+        } else if (!isWhite && temp.includes('Black')) {
+
+        } else {
+
+            arr.push(n + 9);
+        }
+    }
+    isNull = document.getElementById(n - 9) == null;
+    if ((document.getElementById(n - 9) != null && isOppsitePawn) ||
+        (document.getElementById(n - 9) != null && document.getElementById(n - 9) == '')) {
+        // arr.push(n - 9);
+        let temp = findPawnName(document.getElementById(n - 9).innerHTML) + ""
+        console.log("tejmp: ", temp);
+        if (isWhite && temp.includes('White')) {
+
+        } else if (!isWhite && temp.includes('Black')) {
+
+        } else {
+
+            arr.push(n - 9);
+        }
+    }
+    console.log('moves', arr)
     return arr;
 }
 
