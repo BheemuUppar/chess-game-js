@@ -224,20 +224,21 @@ function getRookMoves(isWhite, id) {
         //  for forword moves
         for (let i = 1; i < 10; i++) {
             ++n;
-            if (document.getElementById(n).innerHTML == '') {
+            if (document.getElementById(n) && document.getElementById(n).innerHTML == '') {
                 arr.push(n);
             }
 
             // if oppoenent pawn is there means 
-            if (document.getElementById((n)) != null && document.getElementById((n)).innerHTML != '' && arr.indexOf(n) == -1) {
+            if (document.getElementById((n)) != null &&
+                document.getElementById((n)).innerHTML != '' && arr.indexOf(n) == -1) {
                 let inner = document.getElementById((n)).innerHTML;
 
                 if (inner.includes('Black') && isWhite) {
                     arr.push(n);
                 }
-                if (inner.includes('White') && !isWhite) {
-                    arr.push(n);
-                }
+                // if (inner.includes('White') && !isWhite) {
+                //     arr.push(n);
+                // }
             }
             if (document.getElementById(n) == null || document.getElementById(n).innerHTML != '') {
                 break;
@@ -249,26 +250,51 @@ function getRookMoves(isWhite, id) {
 
             // console.log('ROOK')
             --n;
-            if ((document.getElementById(n) == null || document.getElementById(n).innerHTML != '')) {
+            if ((document.getElementById(n) == null)) {
                 break;
+            }
+            if ((document.getElementById(n) != '')) {
+                let pawn = findPawnName(document.getElementById(n).innerHTML) + ''
+                if (pawn.includes('Black') && arr.indexOf(n) == -1) {
+                    alert(pawn)
+                    arr.push(n)
+                    break;
+                }
+
             }
             if (document.getElementById(n).innerHTML == '' && arr.indexOf(n) == -1) {
                 arr.push(n);
             }
+
 
         }
         n = Number(id);
         //  for left side moves
         for (let i = 1; i < 10; i++) {
-
-            // console.log('ROOK')
+            debugger
             n = n - 10;
-            if (document.getElementById(n) == null || document.getElementById(n).innerHTML != '') {
+            // debugger
+            if (document.getElementById(n) == null) {
                 break;
+            }
+            if ((document.getElementById(n) != '')) {
+                let pawn = findPawnName(document.getElementById(n).innerHTML) + ''
+                if (pawn.includes('Black') && arr.indexOf(n) == -1) {
+                    alert(pawn)
+                    arr.push(n)
+                    break;
+                }
+
             }
 
             if (document.getElementById(n).innerHTML == '' && arr.indexOf(n) == -1) {
                 arr.push(n);
+            }
+            if (document.getElementById(n)) {
+                if (document.getElementById(n).innerHTML != '') {
+
+                    break;
+                }
             }
 
 
@@ -278,31 +304,47 @@ function getRookMoves(isWhite, id) {
         for (let i = 1; i < 10; i++) {
 
             n = n + 10;
-            if (document.getElementById(n) == null || document.getElementById(n).innerHTML != '') {
+            if (document.getElementById(n) == null) {
                 break;
+            }
+            // checking for opponent pawn
+            if ((document.getElementById(n) != '')) {
+                let pawn = findPawnName(document.getElementById(n).innerHTML) + ''
+                if (pawn.includes('Black') && arr.indexOf(n) == -1) {
+                    alert(pawn)
+                    arr.push(n)
+                    break;
+                }
+
             }
             if (document.getElementById(n).innerHTML == '' && arr.indexOf(n) == -1) {
                 arr.push(n);
+            }
+            if (document.getElementById(n)) {
+                if (document.getElementById(n).innerHTML != '') {
+                    break;
+                }
             }
         }
     } else {
         //  for forword moves
         for (let i = 1; i < 10; i++) {
             --n;
-            if (document.getElementById(n).innerHTML == '') {
+            if (document.getElementById(n) && document.getElementById(n).innerHTML == '') {
                 arr.push(n);
             }
 
             // if oppoenent pawn is there means 
-            if (document.getElementById((n)) != null && document.getElementById((n)).innerHTML != '' && arr.indexOf(n) == -1) {
+            if (document.getElementById((n)) != null &&
+                document.getElementById((n)).innerHTML != '' && arr.indexOf(n) == -1) {
                 let inner = document.getElementById((n)).innerHTML;
 
-                if (inner.includes('Black') && isWhite) {
+                if (inner.includes('White') && isWhite) {
                     arr.push(n);
                 }
-                if (inner.includes('White') && !isWhite) {
-                    arr.push(n);
-                }
+                // if (inner.includes('White') && !isWhite) {
+                //     arr.push(n);
+                // }
             }
             if (document.getElementById(n) == null || document.getElementById(n).innerHTML != '') {
                 break;
@@ -314,9 +356,20 @@ function getRookMoves(isWhite, id) {
 
             // console.log('ROOK')
             ++n;
-            if ((document.getElementById(n) == null || document.getElementById(n).innerHTML != '')) {
+            if ((document.getElementById(n) == null)) {
                 break;
             }
+            //   checking for opponent pawn
+            if ((document.getElementById(n) != '')) {
+                let pawn = findPawnName(document.getElementById(n).innerHTML) + ''
+                if (pawn.includes('White') && arr.indexOf(n) == -1) {
+                    alert(pawn)
+                    arr.push(n)
+                    break;
+                }
+
+            }
+
             if (document.getElementById(n).innerHTML == '' && arr.indexOf(n) == -1) {
                 arr.push(n);
             }
@@ -328,12 +381,28 @@ function getRookMoves(isWhite, id) {
 
             // console.log('ROOK')
             n = n + 10;
-            if (document.getElementById(n) == null || document.getElementById(n).innerHTML != '') {
+            if (document.getElementById(n) == null) {
                 break;
             }
+            // checking for opponent pawn
+            if ((document.getElementById(n) != '')) {
+                let pawn = findPawnName(document.getElementById(n).innerHTML) + ''
+                if (pawn.includes('White') && arr.indexOf(n) == -1) {
+                    alert(pawn)
+                    arr.push(n)
+                    break;
+                }
 
+            }
             if (document.getElementById(n).innerHTML == '' && arr.indexOf(n) == -1) {
                 arr.push(n);
+            }
+            // breaking
+            if (document.getElementById(n)) {
+                if (document.getElementById(n).innerHTML != '') {
+
+                    break;
+                }
             }
 
 
@@ -343,11 +412,26 @@ function getRookMoves(isWhite, id) {
         for (let i = 1; i < 10; i++) {
 
             n = n - 10;
-            if (document.getElementById(n) == null || document.getElementById(n).innerHTML != '') {
+            if (document.getElementById(n) == null) {
                 break;
+            }
+            // checking for opponent pawn
+            if ((document.getElementById(n) != '')) {
+                let pawn = findPawnName(document.getElementById(n).innerHTML) + ''
+                if (pawn.includes('White') && arr.indexOf(n) == -1) {
+                    alert(pawn)
+                    arr.push(n)
+                    break;
+                }
+
             }
             if (document.getElementById(n).innerHTML == '' && arr.indexOf(n) == -1) {
                 arr.push(n);
+            }
+            if (document.getElementById(n)) {
+                if (document.getElementById(n).innerHTML != '') {
+                    break;
+                }
             }
         }
     }
@@ -904,7 +988,6 @@ function removeHint(clicked) {
 function movePawn(from, to) {
 
     for (const ii of moves) {
-        debugger
         if (to == ii && from != to) {
             let temp = document.getElementById(from).innerHTML;
             document.getElementById(from).innerHTML = '';
@@ -926,4 +1009,8 @@ function movePawn(from, to) {
 function changeTurn() {
     const turn = document.querySelector('#turn');
     turn.innerHTML = currentTurn;
+}
+
+function checkCheckmate() {
+
 }
