@@ -1,5 +1,3 @@
-// alert('working');
-
 let squares = document.querySelectorAll('.square');
 let isPawnSelected = false;
 let moves = [];
@@ -106,7 +104,7 @@ squares.forEach((ele) => {
 
 // function to find Pawn Name on clicked square
 function findPawnName(str) {
-    console.log('Finding: ', str)
+    // console.log('Finding: ', str)
     if (str.includes('WhitePawn')) {
         return "WhitePawn";
     } else if (str.includes('WhiteRook')) {
@@ -256,7 +254,6 @@ function getRookMoves(isWhite, id) {
             if ((document.getElementById(n) != '')) {
                 let pawn = findPawnName(document.getElementById(n).innerHTML) + ''
                 if (pawn.includes('Black') && arr.indexOf(n) == -1) {
-                    alert(pawn)
                     arr.push(n)
                     break;
                 }
@@ -280,7 +277,6 @@ function getRookMoves(isWhite, id) {
             if ((document.getElementById(n) != '')) {
                 let pawn = findPawnName(document.getElementById(n).innerHTML) + ''
                 if (pawn.includes('Black') && arr.indexOf(n) == -1) {
-                    alert(pawn)
                     arr.push(n)
                     break;
                 }
@@ -311,7 +307,6 @@ function getRookMoves(isWhite, id) {
             if ((document.getElementById(n) != '')) {
                 let pawn = findPawnName(document.getElementById(n).innerHTML) + ''
                 if (pawn.includes('Black') && arr.indexOf(n) == -1) {
-                    alert(pawn)
                     arr.push(n)
                     break;
                 }
@@ -363,7 +358,6 @@ function getRookMoves(isWhite, id) {
             if ((document.getElementById(n) != '')) {
                 let pawn = findPawnName(document.getElementById(n).innerHTML) + ''
                 if (pawn.includes('White') && arr.indexOf(n) == -1) {
-                    alert(pawn)
                     arr.push(n)
                     break;
                 }
@@ -388,7 +382,6 @@ function getRookMoves(isWhite, id) {
             if ((document.getElementById(n) != '')) {
                 let pawn = findPawnName(document.getElementById(n).innerHTML) + ''
                 if (pawn.includes('White') && arr.indexOf(n) == -1) {
-                    alert(pawn)
                     arr.push(n)
                     break;
                 }
@@ -419,7 +412,6 @@ function getRookMoves(isWhite, id) {
             if ((document.getElementById(n) != '')) {
                 let pawn = findPawnName(document.getElementById(n).innerHTML) + ''
                 if (pawn.includes('White') && arr.indexOf(n) == -1) {
-                    alert(pawn)
                     arr.push(n)
                     break;
                 }
@@ -854,7 +846,7 @@ function getKingMoves(isWhite, id) {
         (document.getElementById(n - 1) != null && document.getElementById(n - 1) == '')) {
         // arr.push(n - 1);
         let temp = findPawnName(document.getElementById(n - 1).innerHTML) + ""
-        console.log("tejmp: ", temp);
+            // console.log("tejmp: ", temp);
         if (isWhite && temp.includes('White')) {
 
         } else if (!isWhite && temp.includes('Black')) {
@@ -868,7 +860,7 @@ function getKingMoves(isWhite, id) {
     if ((document.getElementById(n + 10) != null && isOppsitePawn) ||
         (document.getElementById(n + 10) != null && document.getElementById(n + 10) == '')) {
         let temp = findPawnName(document.getElementById(n + 10).innerHTML) + ""
-        console.log("tejmp: ", temp);
+            // console.log("tejmp: ", temp);
         if (isWhite && temp.includes('White')) {
 
         } else if (!isWhite && temp.includes('Black')) {
@@ -883,7 +875,7 @@ function getKingMoves(isWhite, id) {
         (document.getElementById(n - 10) != null && document.getElementById(n - 10) == '')) {
         // arr.push(n - 10);
         let temp = findPawnName(document.getElementById(n - 10).innerHTML) + ""
-        console.log("tejmp: ", temp);
+            // console.log("tejmp: ", temp);
         if (isWhite && temp.includes('White')) {
 
         } else if (!isWhite && temp.includes('Black')) {
@@ -913,7 +905,7 @@ function getKingMoves(isWhite, id) {
         (document.getElementById(n - 11) != null && document.getElementById(n - 11) == '')) {
         // arr.push(n - 11);
         let temp = findPawnName(document.getElementById(n - 11).innerHTML) + ""
-        console.log("tejmp: ", temp);
+            // console.log("tejmp: ", temp);
         if (isWhite && temp.includes('White')) {
 
         } else if (!isWhite && temp.includes('Black')) {
@@ -928,7 +920,7 @@ function getKingMoves(isWhite, id) {
         (document.getElementById(n + 9) != null && document.getElementById(n + 9) == '')) {
         // arr.push(n + 9);
         let temp = findPawnName(document.getElementById(n + 9).innerHTML) + ""
-        console.log("tejmp: ", temp);
+            // console.log("tejmp: ", temp);
         if (isWhite && temp.includes('White')) {
 
         } else if (!isWhite && temp.includes('Black')) {
@@ -943,7 +935,7 @@ function getKingMoves(isWhite, id) {
         (document.getElementById(n - 9) != null && document.getElementById(n - 9) == '')) {
         // arr.push(n - 9);
         let temp = findPawnName(document.getElementById(n - 9).innerHTML) + ""
-        console.log("tejmp: ", temp);
+            // console.log("tejmp: ", temp);
         if (isWhite && temp.includes('White')) {
 
         } else if (!isWhite && temp.includes('Black')) {
@@ -958,17 +950,15 @@ function getKingMoves(isWhite, id) {
 }
 
 
-
-
-
-
 let highlights;
 
 function addHint(ids) {
+
     // adding Hint
     ids.forEach((id) => {
         document.getElementById(id + '').classList.add('hint');
     });
+
 
 }
 
@@ -995,8 +985,13 @@ function movePawn(from, to) {
 
             if (currentTurn === 'white') {
                 currentTurn = 'black';
+                checkCheckmate(true);
+                checkforWinner(true);
             } else if (currentTurn === 'black') {
                 currentTurn = 'white';
+                checkCheckmate(false);
+                checkforWinner(false);
+
             }
             changeTurn();
             break;
@@ -1011,6 +1006,165 @@ function changeTurn() {
     turn.innerHTML = currentTurn;
 }
 
-function checkCheckmate() {
+let nextMoves = [];
+let isCheck = false;
+
+function checkCheckmate(isWhite) {
+    let temp = [];
+    let opponentKingPlace = null;
+
+    if (!isWhite) {
+
+        // let blackPawns = document.querySelectorAll('.black');
+        const childElement = document.querySelectorAll('.black');
+        childElement.forEach((ele) => {
+                // console.log(ele.parentElement.getAttribute('id'));
+                let id = ele.parentElement.getAttribute('id');
+                let name = findPawnName(document.getElementById(id).innerHTML) + '';
+                console.log(name, getMovesByPawnName(name, id));
+                temp = [...new Set(temp.concat(getMovesByPawnName(name, id)))];
+                // console.log(name)
+            })
+            //  finding oopposite King place
+        const childElements = document.querySelectorAll('.white');
+        childElements.forEach((ele) => {
+            // console.log(ele.parentElement.getAttribute('id'));
+            let id = ele.parentElement.getAttribute('id');
+            let name = findPawnName(document.getElementById(id).innerHTML) + '';
+            // console.log(name, getMovesByPawnName(name, id));
+            if (name === 'WhiteKing') {
+                opponentKingPlace = Number(id);
+            }
+            console.log("In white block: ", opponentKingPlace)
+            console.log("In white block: ", temp)
+
+            if (temp.indexOf(opponentKingPlace) != -1) {
+                isCheck = true;
+
+            }
+        })
+
+    } else {
+
+
+        const childElement = document.querySelectorAll('.white');
+        childElement.forEach((ele) => {
+                let id = ele.parentElement.getAttribute('id');
+                let name = findPawnName(document.getElementById(id).innerHTML) + '';
+                console.log(name, getMovesByPawnName(name, id));
+                temp = [...new Set(temp.concat(getMovesByPawnName(name, id)))];
+            })
+            //  finding oopposite King place
+        const childElements = document.querySelectorAll('.black');
+        childElements.forEach((ele) => {
+            // console.log(ele.parentElement.getAttribute('id'));
+            let id = ele.parentElement.getAttribute('id');
+            let name = findPawnName(document.getElementById(id).innerHTML) + '';
+            // console.log(name, getMovesByPawnName(name, id));
+            if (name === 'BlackKing') {
+                opponentKingPlace = Number(id);
+            }
+            // console.log(name)
+            console.log("In black block: ", name)
+            if (temp.indexOf(opponentKingPlace) != -1) {
+                isCheck = true;
+            }
+        })
+    }
+
+
+
+    console.log('ENEMY: ', isCheck)
+        // }
+    if (isCheck) {
+        alert('Checkmate mother fucker');
+        isCheck = false;
+    }
 
 }
+
+function getMovesByPawnName(name, id) {
+    let moves = [];
+    switch (name) {
+        case 'BlackPawn':
+            moves = getPawnMoves(false, id);
+            break;
+        case 'BlackRook':
+            moves = getRookMoves(false, id);
+            break;
+        case 'BlackKnight':
+            moves = getKnightMoves(false, id);
+            break;
+        case 'BlackBishop':
+            moves = getBishopMoves(false, id);
+            break;
+        case 'BlackQueen':
+            moves = getQueenMoves(false, id);
+            break;
+        case 'BlackKing':
+            moves = getKingMoves(false, id);
+            break;
+            //   for white
+        case 'WhitePawn':
+            moves = getPawnMoves(true, id);
+            break;
+        case 'WhiteRook':
+            moves = getRookMoves(true, id);
+            break;
+        case 'WhiteKnight':
+            moves = getKnightMoves(true, id);
+            break;
+        case 'WhiteBishop':
+            moves = getBishopMoves(true, id);
+            break;
+        case 'WhiteQueen':
+            moves = getQueenMoves(true, id);
+            break;
+        case 'WhiteKing':
+            moves = getKingMoves(true, id);
+            break;
+        default:
+
+
+    }
+    return moves;
+
+}
+
+
+function checkforWinner(isWhite) {
+    let temp = [];
+    if (isWhite) {
+        const childElements = document.querySelectorAll('.black');
+        childElements.forEach((ele) => {
+            // console.log(ele.parentElement.getAttribute('id'));
+            let id = ele.parentElement.getAttribute('id');
+            let name = findPawnName(document.getElementById(id).innerHTML) + '';
+            // console.log(name, getMovesByPawnName(name, id));
+            temp.push(name);
+        });
+        if (temp.indexOf('BlackKing') === -1) {
+            alert("White win")
+        }
+    } else {
+        const childElements = document.querySelectorAll('.white');
+        childElements.forEach((ele) => {
+            let id = ele.parentElement.getAttribute('id');
+            let name = findPawnName(document.getElementById(id).innerHTML) + '';
+            temp.push(name);
+        });
+        if (temp.indexOf('WhiteKing') === -1) {
+            alert("Black win")
+        }
+    }
+}
+// function success() {
+//     workHard(efforts);
+//     neverGiveUp(positiveAttitude);
+//     consistency(time);
+//     if (notSucceed) {
+//         success();
+//     } else {
+//         return "Success";
+//     }
+// }
