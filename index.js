@@ -6,6 +6,7 @@ let currentTurn = "white";
 
 squares.forEach((ele) => {
     ele.addEventListener('click', () => {
+
         // removing  hints for previosly clicked pawns
         removeHint(ele.getAttribute('id'));
 
