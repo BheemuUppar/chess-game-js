@@ -1078,7 +1078,7 @@ function checkCheckmate(isWhite) {
     console.log('ENEMY: ', isCheck)
         // }
     if (isCheck) {
-        alert('Checkmate mother fucker');
+        alert('Checkmate maga');
         isCheck = false;
     }
 
