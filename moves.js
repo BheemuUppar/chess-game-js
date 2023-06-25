@@ -196,7 +196,7 @@
                  document.getElementById((n)).innerHTML != '' && arr.indexOf(n) == -1) {
                  let inner = document.getElementById((n)).innerHTML;
 
-                 if (inner.includes('White') && isWhite) {
+                 if (inner.includes('White') && !isWhite) {
                      arr.push(n);
                  }
                  // if (inner.includes('White') && !isWhite) {
@@ -441,7 +441,7 @@
          } else {
              --n;
          }
-         if (document.getElementById(n).innerHTML == '') {
+         if (document.getElementById(n) && document.getElementById(n).innerHTML == '') {
              arr.push(n);
          }
          // if oppoenent pawn is there means 

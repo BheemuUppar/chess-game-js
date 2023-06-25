@@ -4,6 +4,14 @@ let moves = [];
 let currentId;
 let currentTurn = "white";
 
+
+let clickAudio = new Audio('../audios/click.mp3');
+let moveAudio = new Audio('../audios/move.mp3');
+let killAudio = new Audio('../audios/kill.mp3');
+let checkmateAudio = new Audio('../audios/checkmate.mp3');
+let gameOverAudio = new Audio('../audios/gameOver.mp3');
+let gameStart = new Audio('../audios/game-start.mp3');
+gameStart.play();
 squares.forEach((ele) => {
     ele.addEventListener('click', () => {
 
@@ -11,11 +19,13 @@ squares.forEach((ele) => {
         removeHint(ele.getAttribute('id'));
 
 
+
         let isWhite;
         let pawnName;
 
         if (!isPawnSelected) {
             if (ele.innerHTML != '') {
+
                 currentId = ele.getAttribute('id');
 
                 isWhite = ele.innerHTML.includes('White');
@@ -23,6 +33,7 @@ squares.forEach((ele) => {
                 console.log("Turn: ", currentTurn)
                 if (isWhite && currentTurn === 'white') {
                     isPawnSelected = true;
+                    clickAudio.play();
                     if (pawnName === 'WhitePawn') {
                         // console.log("white pawn !");
                         moves = getPawnMoves(true, currentId);
@@ -58,6 +69,7 @@ squares.forEach((ele) => {
                 // code for black pawns
                 if (!isWhite && currentTurn === 'black') {
                     isPawnSelected = true;
+                    clickAudio.play();
                     if (pawnName === 'BlackPawn') {
                         // console.log("black pawn !");
                         moves = getPawnMoves(false, currentId);
@@ -167,9 +179,12 @@ function movePawn(from, to) {
     for (const ii of moves) {
         if (to == ii && from != to) {
             let temp = document.getElementById(from).innerHTML;
+            if (document.getElementById(to).innerHTML != '') {
+                killAudio.play();
+            }
             document.getElementById(from).innerHTML = '';
             document.getElementById(to).innerHTML = temp;
-
+            moveAudio.play();
             if (currentTurn === 'white') {
                 currentTurn = 'black';
                 checkCheckmate(true);
@@ -272,7 +287,9 @@ function checkCheckmate(isWhite) {
     console.log('ENEMY: ', isCheck)
         // }
     if (isCheck) {
-        alert('Checkmate maga');
+
+        // alert('Checkmate maga');
+        checkmateAudio.play();
         isCheck = false;
     }
 
@@ -339,7 +356,12 @@ function checkforWinner(isWhite) {
             temp.push(name);
         });
         if (temp.indexOf('BlackKing') === -1) {
-            alert("White win")
+            gameOverAudio.play();
+            setTimeout(() => {
+                alert("White win")
+                resetGame();
+
+            }, 3000)
         }
     } else {
         const childElements = document.querySelectorAll('.white');
@@ -349,7 +371,14 @@ function checkforWinner(isWhite) {
             temp.push(name);
         });
         if (temp.indexOf('WhiteKing') === -1) {
-            alert("Black win")
+            gameOverAudio.play();
+            // alert("Black win");
+            // resetGame();
+            setTimeout(() => {
+                alert("Black win")
+                resetGame();
+
+            }, 3000)
         }
     }
 }
@@ -358,9 +387,9 @@ function resetGame() {
     window.location.reload();
 }
 
-let checkbox = document.getElementById('backdrop');
-checkbox.addEventListener('change', () => {
-    if (checkbox.checked) {
+// let checkbox = document.getElementById('backdrop');
+// checkbox.addEventListener('change', () => {
+//     if (checkbox.checked) {
 
-    }
-})
+//     }
+// })
