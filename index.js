@@ -10,7 +10,11 @@ let checkmateAudio = new Audio("../audios/checkmate.mp3");
 let gameOverAudio = new Audio("../audios/gameOver.mp3");
 let gameStart = new Audio("../audios/game-start.mp3");
 
+let selected = '';
 gameStart.play();
+
+let selectedArray =[];
+
 squares.forEach((ele) => {
   ele.addEventListener("click", () => {
     // removing  hints for previosly clicked pawns
@@ -18,12 +22,17 @@ squares.forEach((ele) => {
     let isWhite;
     let pawnName;
     if (!isPawnSelected) {
-      if (ele.innerHTML != "") {
-        currentId = ele.getAttribute("id");
+        if (ele.innerHTML != "") {
+            currentId = ele.getAttribute("id");
+            selected = currentId;
+           
         isWhite = ele.innerHTML.includes("White");
         pawnName = findPawnName(ele.innerHTML);
         if (isWhite && currentTurn === "white") {
           isPawnSelected = true;
+        //   selectedArray.push(selected);
+        //   selectPawn()
+         
           clickAudio.play();
           if (pawnName === "WhitePawn") {
             moves = getPawnMoves(true, currentId);
@@ -53,6 +62,7 @@ squares.forEach((ele) => {
         // code for black pawns
         if (!isWhite && currentTurn === "black") {
           isPawnSelected = true;
+        //   selectPawn();
           clickAudio.play();
           if (pawnName === "BlackPawn") {
             moves = getPawnMoves(false, currentId);
@@ -81,6 +91,7 @@ squares.forEach((ele) => {
         }
       } else {
         // logic if no pawn is there on clicked square
+        unselect();
       }
     } else {
       isPawnSelected = false;
@@ -154,15 +165,33 @@ function movePawn(from, to) {
         currentTurn = "black";
         checkCheckmate(true);
         checkforWinner(true);
+        unselect();
+       
       } else if (currentTurn === "black") {
         currentTurn = "white";
         checkCheckmate(false);
         checkforWinner(false);
+        unselect();
       }
       changeTurn();
       break;
     }
   }
+}
+
+function unselect(){
+    selectedArray.forEach(id=>{
+        if( document.getElementById(id)){
+           document.getElementById(id).classList.remove('selected');
+       }
+   })
+}
+function selectPawn(){
+    selectedArray.forEach(id=>{
+      if(id == selected &&  document.getElementById(selected)){
+          document.getElementById(selected).classList.add('selected');
+      }
+    })
 }
 
 function changeTurn() {
