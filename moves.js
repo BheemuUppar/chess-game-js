@@ -547,7 +547,8 @@ function getKingMoves(isWhite, id) {
   // we can use loops here to avoid if-else repitation
   let posibleMoves = [n + 1, n - 1, n+10 , n - 10, n + 11, n - 11 ,n-9 , n+9] ;
   posibleMoves.forEach(id=>{
-    let isNull = document.getElementById(id) == null;
+    if(oppositePawnMoves.indexOf(id) == -1){
+      let isNull = document.getElementById(id) == null;
     if ((!isNull && isOppsitePawn) ||(!isNull && document.getElementById(id) == "")) {
       let temp = findPawnName(document.getElementById(id).innerHTML) + "";
       if (isWhite && temp.includes("White")) {
@@ -555,6 +556,7 @@ function getKingMoves(isWhite, id) {
       } else {
         arr.push(id);
       }
+    }
     }
   })
   return arr;

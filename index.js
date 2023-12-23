@@ -142,7 +142,6 @@ function addHint(ids) {
 
 function removeHint(clicked) {
   // highlights = [];
-
   //    removing hits
   moves.forEach((id) => {
     if (currentId != clicked) {
@@ -163,16 +162,18 @@ function movePawn(from, to) {
       moveAudio.play();
       if (currentTurn === "white") {
         currentTurn = "black";
-        checkCheckmate(true);
+        onCheck(true);
         checkforWinner(true);
         unselect();
+        // getOppositeAlivePawns(currentTurn=='white'?false:true)
        
       } else if (currentTurn === "black") {
         currentTurn = "white";
-        checkCheckmate(false);
+        onCheck(false);
         checkforWinner(false);
         unselect();
       }
+      getOppositeAlivePawns(currentTurn=='white'?true:false)
       changeTurn();
       break;
     }
@@ -205,10 +206,10 @@ function changeTurn() {
   }
 }
 
-let nextMoves = [];
+// let nextMoves = [];
 let isCheck = false;
 
-function checkCheckmate(isWhite) {
+function onCheck(isWhite) {
   let temp = [];
   let opponentKingPlace = null;
 
@@ -259,7 +260,7 @@ function checkCheckmate(isWhite) {
   }
 }
 
-function getMovesByPawnName(name, id) {
+function getMovesByPawnName(name, id ) {
   let moves = [];
   switch (name) {
     case "BlackPawn":
@@ -301,6 +302,7 @@ function getMovesByPawnName(name, id) {
       break;
     default:
   }
+
   return moves;
 }
 
@@ -342,3 +344,30 @@ function checkforWinner(isWhite) {
 function resetGame() {
   window.location.reload();
 }
+
+let oppositePawnMoves = [];
+function getOppositeAlivePawns(isWhite){
+  oppositePawnMoves =[]
+    squares.forEach(square=>{
+      if(square?.children[0]?.getAttribute('src')){
+        let id = Number(square.getAttribute('id'));
+        const src = square?.children[0]?.getAttribute('src');
+        let currentPawn = findPawnName(src);
+        if(!isWhite && currentPawn.includes('White') ){
+          oppositePawnMoves.push( ...getMovesByPawnName(currentPawn,id));
+        }
+        else if(isWhite && currentPawn.includes('Black') ){
+            // console.log(currentPawn);
+            oppositePawnMoves.push(...getMovesByPawnName(currentPawn,id));
+        }
+      }
+    });
+ 
+      let temp = new Set(oppositePawnMoves)
+      // console.log(Array.from(temp));
+      return Array.from(temp)
+}
+
+
+
+
